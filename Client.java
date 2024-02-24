@@ -31,9 +31,12 @@ public class Client implements Runnable {
     }
 
     public static void main(String[] args) throws IOException{
-        String serverAddress = "192.168.1.9";
-        int serverPort = 5000;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String serverAddress;
+        int serverPort = 5000;
+        
+        System.out.print("Enter Server Address to connect to: ");
+        serverAddress = br.readLine();
         System.out.print("Enter Username: ");
         String name = br.readLine();
 
