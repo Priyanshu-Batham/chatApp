@@ -31,7 +31,7 @@ public class Client implements Runnable {
     }
 
     public static void main(String[] args) throws IOException{
-        String serverAddress = "localhost";
+        String serverAddress = "192.168.1.9";
         int serverPort = 5000;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter Username: ");
