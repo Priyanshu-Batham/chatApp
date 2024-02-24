@@ -4,12 +4,14 @@ import java.net.*;
 public class Client{
     Socket socket;
     PrintWriter speaker;
+    BufferedReader listner;
 
     Client(String serverAddress, int serverPort) throws IOException {
         System.out.println("Client Started");
         socket = new Socket(serverAddress, serverPort);
         System.out.println("Connected to server: " + serverAddress);
         speaker = new PrintWriter(socket.getOutputStream(), true);
+        listner = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     public static void main(String[] args) throws IOException{
@@ -23,6 +25,9 @@ public class Client{
             System.out.print("Enter Message: ");
             String msg = br.readLine();
             clientObj.speaker.println(msg);
+
+            String response = clientObj.listner.readLine();
+            System.out.println("SERVER: " + response);
         }
     }
 }

@@ -5,6 +5,7 @@ public class Server {
     ServerSocket server;
     Socket socket;
     BufferedReader listen;
+    PrintWriter speak;
 
     Server(int port)throws IOException{
         server = new ServerSocket(port);
@@ -13,6 +14,7 @@ public class Server {
         socket = server.accept();
         System.out.println("Accepted Client");
         listen = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        speak = new PrintWriter(socket.getOutputStream(), true);
     }
 
     public static void main(String args[]) throws IOException {
@@ -21,7 +23,12 @@ public class Server {
 
         while(true){
             String msg = myServer.listen.readLine();
-            System.out.println(msg);
+            System.out.println("CLIENT: "+msg);
+
+            String response = "OKAY";
+            System.out.println("SERVER: "+response);
+
+            myServer.speak.println(response);
         }
     }
 }
