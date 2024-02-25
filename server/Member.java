@@ -5,6 +5,8 @@ import java.io.*;
 
 public class Member implements Runnable {
     static ArrayList<Member> group = new ArrayList<>();
+    static String path = "../backup/backup.txt";
+    static FileWriter file;
 
     Socket socket;
     String name;
@@ -39,8 +41,14 @@ public class Member implements Runnable {
         }
     }
 
-    // Not using it right now
     public static void broadcast(String msg, String notToBroadcast){
+        try{
+            file = new FileWriter(path, true);
+            file.append(msg + "\n");
+            file.close();
+        }catch(IOException e){
+            System.out.println(e);
+        }
         for(Member mem: group){
             if(!mem.name.equals(notToBroadcast)){
                 mem.out.println(msg);
